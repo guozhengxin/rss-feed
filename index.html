@@ -1,12 +1,12 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>郭政鑫 · 每日早报</title>
+<title>硅基野人 · 每日早报</title>
 <meta name="description" content="电商动态、运营实战、AI 热点与市场风向，每天更新。">
-<link rel="alternate" type="application/rss+xml" title="郭政鑫 · 每日早报" href="rss.xml">
+<link rel="alternate" type="application/rss+xml" title="硅基野人 · 每日早报" href="rss.xml">
 <style>
   :root{
     --bg:#f7f4ee;--paper:#fffdf8;--ink:#14202e;--muted:#687382;
@@ -91,7 +91,7 @@
 <div class="wrap">
   <header class="hero">
     <div class="eyebrow">DAILY BRIEF</div>
-    <h1 id="feed-title">郭政鑫 · 每日早报</h1>
+    <h1 id="feed-title">硅基野人 · 每日早报</h1>
     <p class="desc" id="feed-desc">电商动态、运营实战、AI 热点与市场风向，每天更新。</p>
     <div class="meta">
       <span class="updated" id="updated">正在读取更新日期…</span>
@@ -104,7 +104,7 @@
   </main>
 
   <footer>
-    <span><b>郭政鑫 · 每日早报</b> · 每天 05:00 左右更新</span>
+    <span><b>硅基野人 · 每日早报</b> · 每天 05:00 左右更新</span>
     <span>仅供阅读 · RSS 地址可复制到快捷指令</span>
   </footer>
 </div>
@@ -117,6 +117,8 @@
   var descEl = document.getElementById('feed-desc');
   var updatedEl = document.getElementById('updated');
   var copyBtn = document.getElementById('copyRss');
+
+  function displayName(s){ return String(s || '').replace(/郭政鑫/g, '硅基野人'); }
 
   var cats = {
     '电商动态': {cls:'ec', name:'电商动态'},
@@ -161,8 +163,8 @@
     var ch = doc.querySelector('channel');
     if(!ch) throw new Error('RSS 内容为空');
 
-    var channelTitle = ch.querySelector('title')?.textContent || '每日早报';
-    var channelDesc = ch.querySelector('description')?.textContent || '';
+    var channelTitle = displayName(ch.querySelector('title')?.textContent || '每日早报');
+    var channelDesc = displayName(ch.querySelector('description')?.textContent || '');
     titleEl.textContent = channelTitle;
     descEl.textContent = channelDesc;
 
@@ -179,7 +181,7 @@
     var shown = 0;
     items.forEach(function(item, i){
       if(isWorkItem(item, i)) return;
-      var raw = item.querySelector('title')?.textContent || '';
+      var raw = displayName(item.querySelector('title')?.textContent || '');
       var parsed = parseTitle(raw);
       var cfg = cats[parsed.cat] || {cls:'ec', name: parsed.cat || '早报'};
       var date = dateText(item.querySelector('pubDate')?.textContent || '');
@@ -232,3 +234,4 @@
 </script>
 </body>
 </html>
+
