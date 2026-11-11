@@ -104,7 +104,7 @@
   </main>
 
   <footer>
-    <span><b>硅基野人 · 每日早报</b> · 每天 05:00 左右更新</span>
+    <span><b>硅基野人 · 每日早报</b> · 页面自动读取 rss.xml · 每 5 分钟刷新</span>
     <span>仅供阅读 · RSS 地址可复制到快捷指令</span>
   </footer>
 </div>
@@ -230,6 +230,9 @@
   });
 
   load();
+  // 页面不依赖任何本机服务：直接读取同目录的 rss.xml，5 分钟自动刷新一次。
+  setInterval(function(){ if(!document.hidden) load(); }, 5 * 60 * 1000);
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) load(); });
 })();
 </script>
 </body>
