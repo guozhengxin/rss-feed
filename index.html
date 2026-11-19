@@ -114,7 +114,7 @@
   var titleEl = document.getElementById('feed-title');
   var descEl = document.getElementById('feed-desc');
   var updatedEl = document.getElementById('updated');
-  function displayName(s){ return String(s || ""); }
+  function displayName(s){ return String(s || "").replace(/A-I/gi, 'AI'); }
 
   var cats = {
     '电商动态': {cls:'ec', name:'电商动态'},
@@ -134,7 +134,7 @@
     var t = String(raw || '').replace(/\s+/g,' ').trim();
     var m = t.match(/^(日报|工作|电商动态|运营实战|A-I热点|AI热点|市场风向)[:：]\s*(.*)$/);
     if(!m) return {cat:'', body:t, facts:[]};
-    var body = m[2].replace(/，。/g,'。').replace(/。\s*$/,'').trim();
+    var body = m[2].replace(/A-I/gi, 'AI').replace(/，。/g,'。').replace(/。\s*$/,'').trim();
     var facts = body.split('。').map(function(x){return x.replace(/^[，,、\s]+|[，,、\s]+$/g,'').trim();}).filter(function(x){return x.length > 2;});
     return {cat:m[1], body:body, facts:facts};
   }
